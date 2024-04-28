@@ -11,5 +11,7 @@ data_validation:
   STATUS_FILE: artifacts/data_validation/status.txt
   REQUIRED_FILES: ['train', 'test', 'validation', 'dataset_dict.json']
 
-
-
+data_transformation:
+  root_dir: artifacts/data_transformation
+  data_path: artifacts/data_ingestion/samsum_data
+  tokenizer: google/pegasus-cnn_dailymail

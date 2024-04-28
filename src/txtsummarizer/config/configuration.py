@@ -1,6 +1,10 @@
 from txtsummarizer.utils.common import read_yaml, create_directories
 from txtsummarizer.constants import *
-from txtsummarizer.entity import DataIngestionConfig, DataValidationConfig
+from txtsummarizer.entity import (
+    DataIngestionConfig, 
+    DataValidationConfig, 
+    DataTransformationConfig
+)
 
 class ConfigurationManager:
     def __init__(
@@ -42,3 +46,16 @@ class ConfigurationManager:
         )
 
         return data_validation_config
+    
+    def get_data_transformation_config(self) -> DataTransformationConfig:
+        config = self.config.data_transformation
+
+        # Create directory
+        create_directories([config.root_dir])
+        data_tranformation_config = DataTransformationConfig(
+            root_dir=config.root_dir,
+            data_path=config.data_path,
+            tokenizer=config.tokenizer
+        )
+
+        return data_tranformation_config
