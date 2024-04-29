@@ -6,18 +6,29 @@ data_ingestion:
   local_data_file: artifacts/data_ingestion/data.zip
   unzip_dir: artifacts/data_ingestion/samsum_data
 
+
 data_validation:
   root_dir: artifacts/data_validation
   STATUS_FILE: artifacts/data_validation/status.txt
   REQUIRED_FILES: ['train', 'test', 'validation', 'dataset_dict.json']
+
 
 data_transformation:
   root_dir: artifacts/data_transformation
   data_path: artifacts/data_ingestion/samsum_data
   tokenizer: google/pegasus-cnn_dailymail
 
+
 model_trainer:
   root_dir: artifacts/model_trainer
   data_path: artifacts/data_transformation/samsum_data
   model_name: google/pegasus-cnn_dailymail
   save_model_name: pegasus_samsum_model
+
+
+model_evaluation:
+  root_dir: artifacts/model_evaluation
+  data_path: artifacts/data_transformation/samsum_data
+  model_path: artifacts/model_trainer/pegasus_samsum_model
+  tokenizer_path: artifacts/model_trainer/tokenizer
+  metric_filename: artifacts/model_evaluation/metric.csv
